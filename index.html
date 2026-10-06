@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aflah Muhammad Shafin | Portofolio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Dasar */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Preloader Elegan */
+    #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0b1120;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .loader-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(212, 175, 55, 0.15);
+      border-radius: 50%;
+      border-top-color: #d4af37;
+      animation: spin 1s infinite linear;
+      margin-bottom: 16px;
+    }
+
+    .loader-text {
+      color: #d4af37;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #loader-wrapper.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Header & Navigasi */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 6%;
+      background-color: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: #d4af37;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #f3e8ca 0%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 0.98rem;
+      color: #94a3b8;
+      max-width: 500px;
+      margin-bottom: 28px;
+    }
+
+    /* Kontainer Tombol Aksi Hero */
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+      color: #0f172a;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Style Tombol Download CV */
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: rgba(212, 175, 55, 0.05);
+      color: #d4af37;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1.5px solid #d4af37;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(212, 175, 55, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .image-container {
+      width: 100%;
+      max-width: 250px;
+      height: 310px;
+      border-top-left-radius: 120px;
+      border-top-right-radius: 120px;
+      overflow: hidden;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Section & Content */
+    section {
+      padding: 50px 6%;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 3px;
+      background: #d4af37;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Timeline Pendidikan */
+    .timeline {
+      max-width: 650px;
+      margin: 0 auto;
+      position: relative;
+      border-left: 2px solid rgba(212, 175, 55, 0.3);
+      padding-left: 20px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -27px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #d4af37;
+      border: 3px solid #0f172a;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    }
+
+    .timeline-content {
+      background-color: #1e293b;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .timeline-date {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #d4af37;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 2px;
+    }
+
+    .timeline-subtitle {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .timeline-description {
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .skill-card {
+      background-color: #1e293b;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Contact Section */
+    .contact-container {
+      max-width: 550px;
+      margin: 0 auto;
+      text-align: center;
+      background-color: #1e293b;
+      padding: 32px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-container p {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background-color: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      flex: 1 1 120px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      background-color: #0b1120;
+      font-size: 0.8rem;
+      color: #64748b;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #0f172a;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      nav.active {
+        max-height: 250px;
+        padding: 16px 0;
+      }
+
+      nav a {
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader-wrapper">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Memuat Portofolio...</div>
+  </div>
+
+  <!-- Header & Navigasi -->
+  <header>
+    <a href="#" class="logo">AFLAHPORT</a>
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="navMenu">
+      <a href="#about">Tentang</a>
+      <a href="#education">Pendidikan</a>
+      <a href="#skills">Keahlian</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <h1 class="hero-title">Aflah<br><span>Muhammad</span><br>Shafin</h1>
+    
+    <p class="hero-description">
+      Mahasiswa Manajemen Informatika Politeknik Negeri Sriwijaya yang berfokus pada Pengembang Web, UI/UX Design, dan Mobile Programming.
+    </p>
+
+    <!-- Tombol Aksi Hero -->
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">
+        Hubungi Saya &rarr;
+      </a>
+      
+      <!-- Tombol Download CV (Pastikan file PDF disimpan di folder proyek yang sama) -->
+      <a href="Curriculum Vitae AFLAH MUHAMMAD SHAFIN TERBARU.pdf" download ="Curriculum Vitae AFLAH MUHAMMAD SHAFIN TERBARU.pdf" class="btn">
+        &#8595; Unduh CV
+      </a>
+    </div>
+
+    <div class="image-container">
+      <img src="foto-profil.jpeg" alt="Foto Aflah Muhammad Shafin">
+    </div>
+  </section>
+
+  <!-- Section Riwayat Pendidikan -->
+  <section id="education">
+    <h2 class="section-title">Riwayat Pendidikan</h2>
+    <div class="timeline">
+      
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2025 - Sekarang</div>
+          <h3 class="timeline-title">D3 Manajemen Informatika</h3>
+          <div class="timeline-subtitle">Politeknik Negeri Sriwijaya</div>
+          <p class="timeline-description">
+            Fokus pada Pemrograman Mobile, Pengembangan Web (Laravel & Flask), Struktur Data, Serta Perancangan UI/UX.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2022 - 2025</div>
+          <h3 class="timeline-title">SMA</h3>
+          <div class="timeline-subtitle">SMA MUHAMMADIYAH 01 PALEMBANG</div>
+          <p class="timeline-description">
+            Jurusan IPA. Aktif dalam kegiatan teknologi sekolah.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section Keahlian -->
+  <section id="skills">
+    <h2 class="section-title">Keahlian</h2>
+    <div class="skills-grid">
+      <div class="skill-card">UI/UX Figma</div>
+      <div class="skill-card">HTML & CSS</div>
+      <div class="skill-card">C++</div>
+      <div class="skill-card">Laravel</div>
+      <div class="skill-card">Flutter</div>
+    </div>
+  </section>
+
+  <!-- Section Kontak -->
+  <section id="contact">
+    <div class="contact-container">
+      <h2 class="section-title" style="margin-bottom: 16px;">Hubungi Saya</h2>
+      <p>Tertarik untuk bekerja sama atau berdiskusi mengenai proyek? Silakan hubungi saya melalui platform berikut:</p>
+      
+      <div class="social-links">
+        <a href="mailto:aflahshafin03@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/aflah-muhammad-shafin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Aflah Muhammad Shafin. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loader-wrapper');
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 300);
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
