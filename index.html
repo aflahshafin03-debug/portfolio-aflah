@@ -27,7 +27,46 @@
       overflow-x: hidden;
     }
 
-    /* Preloader Elegan */
+    /* Keyframes Animasi Elegan */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatImage {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+      50% { box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); }
+    }
+
+    /* Class Animasi Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Preloader */
     #loader-wrapper {
       position: fixed;
       top: 0;
@@ -59,6 +98,7 @@
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
+      animation: fadeIn 1.5s infinite alternate;
     }
 
     @keyframes spin {
@@ -77,12 +117,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 6%;
-      background-color: rgba(15, 23, 42, 0.95);
+      background-color: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      animation: fadeIn 1s ease-out;
     }
 
     .logo {
@@ -91,6 +132,12 @@
       color: #f1f5f9;
       text-decoration: none;
       letter-spacing: 1px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      color: #d4af37;
     }
 
     .menu-toggle {
@@ -101,6 +148,7 @@
       border: none;
       cursor: pointer;
       padding: 4px;
+      z-index: 1001;
     }
 
     .menu-toggle span {
@@ -110,6 +158,16 @@
       background-color: #d4af37;
       border-radius: 2px;
       transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     nav {
@@ -122,11 +180,27 @@
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
-      transition: color 0.3s;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #d4af37;
+      transition: width 0.3s ease;
     }
 
     nav a:hover {
       color: #d4af37;
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     /* Hero Section */
@@ -145,6 +219,7 @@
       line-height: 1.2;
       margin-bottom: 16px;
       letter-spacing: -0.5px;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
 
     .hero-title span {
@@ -158,9 +233,9 @@
       color: #94a3b8;
       max-width: 500px;
       margin-bottom: 28px;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
     }
 
-    /* Kontainer Tombol Aksi Hero */
     .hero-buttons {
       display: flex;
       gap: 16px;
@@ -168,6 +243,7 @@
       align-items: center;
       flex-wrap: wrap;
       margin-bottom: 40px;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
     }
 
     .btn-primary {
@@ -181,16 +257,17 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 0.9rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+      cursor: pointer;
+      border: none;
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(212, 175, 55, 0.45);
     }
 
-    /* Style Tombol Download CV */
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -203,13 +280,13 @@
       font-weight: 700;
       font-size: 0.9rem;
       border: 1.5px solid #d4af37;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .btn-secondary:hover {
       background-color: rgba(212, 175, 55, 0.15);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
     }
 
     .image-container {
@@ -220,13 +297,18 @@
       border-top-right-radius: 120px;
       overflow: hidden;
       border: 2px solid rgba(212, 175, 55, 0.5);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both, floatImage 5s ease-in-out infinite 1.6s, pulseGlow 4s ease-in-out infinite 1.6s;
     }
 
     .image-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.08);
     }
 
     /* Section & Content */
@@ -240,6 +322,7 @@
       color: #ffffff;
       margin-bottom: 32px;
       text-align: center;
+      position: relative;
     }
 
     .section-title::after {
@@ -250,6 +333,196 @@
       background: #d4af37;
       margin: 10px auto 0;
       border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .section-title:hover::after {
+      width: 70px;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background-color: #1e293b;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #d4af37;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+
+    .project-tech {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tech-badge {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .project-card:hover .tech-badge {
+      background-color: rgba(212, 175, 55, 0.15);
+      color: #d4af37;
+    }
+
+    .btn-view-project {
+      background-color: rgba(212, 175, 55, 0.1);
+      color: #d4af37;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-view-project:hover {
+      background-color: #d4af37;
+      color: #0f172a;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Modal Popup Universal (Proyek & Keahlian) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background-color: #1e293b;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 550px;
+      padding: 28px;
+      position: relative;
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .modal-close:hover {
+      color: #d4af37;
+      transform: rotate(90deg);
+    }
+
+    .modal-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #d4af37;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .modal-body {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .modal-body ul {
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+
+    .modal-body li {
+      margin-bottom: 6px;
+    }
+
+    .modal-action {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
     }
 
     /* Timeline Pendidikan */
@@ -280,6 +553,12 @@
       background-color: #d4af37;
       border: 3px solid #0f172a;
       box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.3);
+      background-color: #ffffff;
     }
 
     .timeline-content {
@@ -287,6 +566,12 @@
       padding: 20px;
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-content {
+      transform: translateX(6px);
+      border-color: rgba(212, 175, 55, 0.3);
     }
 
     .timeline-date {
@@ -315,7 +600,7 @@
       color: #94a3b8;
     }
 
-    /* Skills Grid */
+    /* Skills Grid Interaktif (Dapat Diklik) */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -333,6 +618,32 @@
       font-size: 0.9rem;
       color: #e2e8f0;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+
+    .skill-card::after {
+      content: 'ℹ️';
+      font-size: 0.65rem;
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+    }
+
+    .skill-card:hover {
+      border-color: #d4af37;
+      background-color: rgba(212, 175, 55, 0.12);
+      color: #d4af37;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.2);
+    }
+
+    .skill-card:hover::after {
+      opacity: 1;
     }
 
     /* Contact Section */
@@ -344,6 +655,11 @@
       padding: 32px 20px;
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-container:hover {
+      border-color: rgba(212, 175, 55, 0.3);
     }
 
     .contact-container p {
@@ -370,6 +686,14 @@
       border: 1px solid rgba(212, 175, 55, 0.2);
       flex: 1 1 120px;
       text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background-color: #d4af37;
+      color: #0f172a;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3);
     }
 
     footer {
@@ -402,7 +726,7 @@
       }
 
       nav.active {
-        max-height: 250px;
+        max-height: 280px;
         padding: 16px 0;
       }
 
@@ -443,6 +767,7 @@
 
     <nav id="navMenu">
       <a href="#about">Tentang</a>
+      <a href="#projects">Proyek</a>
       <a href="#education">Pendidikan</a>
       <a href="#skills">Keahlian</a>
       <a href="#contact">Kontak</a>
@@ -457,14 +782,12 @@
       Mahasiswa Manajemen Informatika Politeknik Negeri Sriwijaya yang berfokus pada Pengembang Web, UI/UX Design, dan Mobile Programming.
     </p>
 
-    <!-- Tombol Aksi Hero -->
     <div class="hero-buttons">
       <a href="#contact" class="btn-primary">
         Hubungi Saya &rarr;
       </a>
       
-      <!-- Tombol Download CV (Pastikan file PDF disimpan di folder proyek yang sama) -->
-      <a href="Curriculum Vitae AFLAH MUHAMMAD SHAFIN TERBARU.pdf" download ="Curriculum Vitae AFLAH MUHAMMAD SHAFIN TERBARU.pdf" class="btn">
+      <a href="Curriculum Vitae AFLAH MUHAMMAD SHAFIN TERBARU.pdf" download="Curriculum Vitae AFLAH MUHAMMAD SHAFIN TERBARU.pdf" class="btn-secondary">
         &#8595; Unduh CV
       </a>
     </div>
@@ -474,8 +797,51 @@
     </div>
   </section>
 
+  <!-- Section Proyek / Karya -->
+  <section id="projects" class="reveal">
+    <h2 class="section-title">Proyek & Karya</h2>
+    <div class="projects-grid">
+      
+      <!-- Card 1: Ruang Ilmu -->
+      <div class="project-card">
+        <div>
+          <div class="project-tag">UI/UX & System Design</div>
+          <h3 class="project-title">Ruang Ilmu</h3>
+          <p class="project-desc">
+            Perancangan platform edukasi digital menggunakan pendekatan Design Thinking, dokumen UI/UX lengkap, wireframe, dan alur pengguna.
+          </p>
+          <div class="project-tech">
+            <span class="tech-badge">Figma</span>
+            <span class="tech-badge">Design Thinking</span>
+            <span class="tech-badge">Prototyping</span>
+          </div>
+        </div>
+        <button class="btn-view-project" onclick="openProjectModal('ruang-ilmu')">Lihat Proyek &rarr;</button>
+      </div>
+
+      <!-- Card 2: Website Portofolio -->
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Web Development & UI/UX</div>
+          <h3 class="project-title">Website Portofolio (AFLAHPORT)</h3>
+          <p class="project-desc">
+            Website portofolio pribadi interaktif dengan tema dark mode elegan, animasi preloader, komponen modal pop-up, serta terintegrasi langsung dengan Figma.
+          </p>
+          <div class="project-tech">
+            <span class="tech-badge">HTML5/CSS3</span>
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">Figma</span>
+            <span class="tech-badge">Responsive</span>
+          </div>
+        </div>
+        <button class="btn-view-project" onclick="openProjectModal('aflahport')">Lihat Proyek &rarr;</button>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Section Riwayat Pendidikan -->
-  <section id="education">
+  <section id="education" class="reveal">
     <h2 class="section-title">Riwayat Pendidikan</h2>
     <div class="timeline">
       
@@ -506,20 +872,25 @@
     </div>
   </section>
 
-  <!-- Section Keahlian -->
-  <section id="skills">
+  <!-- Section Keahlian Interaktif -->
+  <section id="skills" class="reveal">
     <h2 class="section-title">Keahlian</h2>
+    <p style="text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: -20px; margin-bottom: 24px;">*Klik pada salah satu keahlian untuk melihat penjelasannya</p>
+    
     <div class="skills-grid">
-      <div class="skill-card">UI/UX Figma</div>
-      <div class="skill-card">HTML & CSS</div>
-      <div class="skill-card">C++</div>
-      <div class="skill-card">Laravel</div>
-      <div class="skill-card">Flutter</div>
+      <div class="skill-card" onclick="openSkillModal('figma')">UI/UX Figma</div>
+      <div class="skill-card" onclick="openSkillModal('htmlcss')">HTML & CSS</div>
+      <div class="skill-card" onclick="openSkillModal('cpp')">C++</div>
+      <div class="skill-card" onclick="openSkillModal('laravel')">Laravel</div>
+      <div class="skill-card" onclick="openSkillModal('flutter')">Flutter</div>
+      <div class="skill-card" onclick="openSkillModal('flask')">Python Flask</div>
+      <div class="skill-card" onclick="openSkillModal('mysql')">MySQL & ERD</div>
+      <div class="skill-card" onclick="openSkillModal('bpmn')">BPMN / DFD</div>
     </div>
   </section>
 
   <!-- Section Kontak -->
-  <section id="contact">
+  <section id="contact" class="reveal">
     <div class="contact-container">
       <h2 class="section-title" style="margin-bottom: 16px;">Hubungi Saya</h2>
       <p>Tertarik untuk bekerja sama atau berdiskusi mengenai proyek? Silakan hubungi saya melalui platform berikut:</p>
@@ -532,6 +903,21 @@
     </div>
   </section>
 
+  <!-- Modal Pop-up Universal -->
+  <div class="modal-overlay" id="appModal" onclick="closeModalOutside(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-tag" id="modalTag">KATEGORI</div>
+      <h3 class="modal-title" id="modalTitle">Judul Modal</h3>
+      <div class="modal-body" id="modalBody">
+        Deskripsi lengkap akan muncul di sini.
+      </div>
+      <div class="modal-action" id="modalAction">
+        <button class="btn-primary" onclick="closeModal()" style="font-size: 0.85rem; padding: 8px 20px;">Tutup</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>&copy; 2026 Aflah Muhammad Shafin. All rights reserved.</p>
@@ -539,6 +925,7 @@
 
   <!-- JavaScript -->
   <script>
+    // Preloader
     window.addEventListener('load', function() {
       const loader = document.getElementById('loader-wrapper');
       setTimeout(() => {
@@ -546,18 +933,240 @@
       }, 300);
     });
 
+    // Mobile Navigation Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
 
     menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
       navMenu.classList.toggle('active');
     });
 
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
         navMenu.classList.remove('active');
       });
     });
+
+    // Data Penjelasan Detail Keahlian (Skills Detail)
+    const skillDetails = {
+      'figma': {
+        tag: 'UI/UX Design',
+        title: 'UI/UX Design & Figma',
+        body: `
+          <p>Memiliki pengalaman dalam merancang antarmuka pengguna (UI) dan pengalaman pengguna (UX) yang responsif dan intuitif.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Riset pengguna menggunakan metodologi <em>Design Thinking</em>.</li>
+            <li>Pembuatan Wireframe, Affinity Diagram, dan User Flow.</li>
+            <li>Pembuatan Prototipe interaktif beresolusi tinggi di Figma.</li>
+            <li>Pengaturan tata letak frame, pemanfaatan komponen, dan auto-layout.</li>
+          </ul>
+        `
+      },
+      'htmlcss': {
+        tag: 'Frontend Web',
+        title: 'HTML5 & CSS3',
+        body: `
+          <p>Dasar pengembangan web modern untuk membangun struktur dan tampilan situs web yang rapi, fleksibel, serta responsif.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Struktur HTML5 semantik dan berstandar web modern.</li>
+            <li>CSS Grid dan Flexbox untuk layout yang adatif di berbagai perangkat.</li>
+            <li>Implementasi kustom animasi CSS (Keyframes & Transitions).</li>
+            <li>Penerapan Dark Mode dan konsistensi skema warna.</li>
+          </ul>
+        `
+      },
+      'cpp': {
+        tag: 'Pemrograman Dasar',
+        title: 'Bahasa Pemrograman C++',
+        body: `
+          <p>Pemahaman kuat mengenai logika pemrograman, algoritma dasar, dan manajemen memori.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Penerapan Struktur Data dasar: <em>Struct</em> dan <em>Array of Structs</em>.</li>
+            <li>Implementasi algoritma <em>Singly Linked List</em>.</li>
+            <li>Pengolahan alur logika dan pemrograman berorientasi objek (OOP) dasar.</li>
+          </ul>
+        `
+      },
+      'laravel': {
+        tag: 'Backend Web Framework',
+        title: 'Laravel Framework',
+        body: `
+          <p>Pengembangan aplikasi web berskala menengah hingga besar menggunakan framework PHP populer Laravel.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Arsitektur MVC (Model-View-Controller).</li>
+            <li>Manajemen database menggunakan Eloquent ORM dan Migrations.</li>
+            <li>Pembuatan sistem autentikasi pengguna dan alur routing aplikasi.</li>
+          </ul>
+        `
+      },
+      'flutter': {
+        tag: 'Mobile Programming',
+        title: 'Flutter & Dart',
+        body: `
+          <p>Pengembangan aplikasi perangkat bergerak (Mobile Apps) lintas platform (Android/Web) menggunakan SDK Flutter.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Penyusunan UI berbasis widget modern dan kustomisasi antarmuka.</li>
+            <li>Integrasi aplikasi ke berbagai jenis platform testing (Chrome Web & Perangkat Android).</li>
+            <li>Pengelolaan State dasar pada aplikasi Flutter.</li>
+          </ul>
+        `
+      },
+      'flask': {
+        tag: 'Backend Web Framework',
+        title: 'Python Flask',
+        body: `
+          <p>Pengembangan server web dan aplikasi microservice yang cepat, efisien, serta fleksibel menggunakan Python.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Pembuatan single-file server script & routing URL.</li>
+            <li>Integrasi template engine Jinja2 dengan HTML/CSS.</li>
+            <li>Pengembangan API dan landing page berkinerja tinggi.</li>
+          </ul>
+        `
+      },
+      'mysql': {
+        tag: 'Database & Data Modeling',
+        title: 'MySQL & ERD Design',
+        body: `
+          <p>Perancangan dan pengelolaan basis data relasional untuk mendukung kebutuhan aplikasi.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Perancangan Entity-Relationship Diagram (ERD) menggunakan Mermaid Script & Notasi Chen.</li>
+            <li>Penulisan kueri SQL dasar (SELECT, INSERT, UPDATE, DELETE, JOIN).</li>
+            <li>Normalisasi basis data dan relasi antar tabel (Primary Key & Foreign Key).</li>
+          </ul>
+        `
+      },
+      'bpmn': {
+        tag: 'System Modeling & Analysis',
+        title: 'BPMN & DFD Diagram',
+        body: `
+          <p>Pemetaan dan analisis alur proses bisnis serta aliran data sistem aplikasi secara terstruktur.</p>
+          <br>
+          <strong>Kemampuan Utama:</strong>
+          <ul>
+            <li>Pembuatan diagram DFD (Data Flow Diagram) Level 0 hingga Level Lanjut.</li>
+            <li>Penyusunan diagram BPMN (Business Process Model and Notation).</li>
+            <li>Penggunaan tools draw.io untuk kompilasi diagram ke dalam format XML.</li>
+          </ul>
+        `
+      }
+    };
+
+    // Data Detail Proyek untuk Modal
+    const projectDetails = {
+      'ruang-ilmu': {
+        tag: 'UI/UX & System Design',
+        title: 'Ruang Ilmu - Platform Edukasi',
+        body: `
+          <p>Platform edukasi digital yang dirancang untuk meningkatkan pengalaman belajar siswa.</p>
+          <br>
+          <strong>Fitur Utama & Metodologi:</strong>
+          <ul>
+            <li>Riset Pengguna dengan metode Design Thinking & Affinity Diagram.</li>
+            <li>Penyusunan User Flow & Wireframe interaktif.</li>
+            <li>Desain UI Komprehensif dan Prototipe Figma.</li>
+          </ul>
+        `,
+        link: 'https://www.figma.com/design/CrJ41TeTQNibkGa1lLeL8r/Untitled',
+        buttonText: 'Buka Preview Figma'
+      },
+      'aflahport': {
+        tag: 'Web Development & UI/UX',
+        title: 'Website Portofolio (AFLAHPORT)',
+        body: `
+          <p>Pengembangan website portofolio personal yang dirancang khusus untuk menampilkan profil, riwayat pendidikan, keahlian teknis, dan galeri proyek interaktif.</p>
+          <br>
+          <strong>Fitur Utama:</strong>
+          <ul>
+            <li>Desain Dark Mode dengan aksen warna emas (Gold Luxury).</li>
+            <li>Preloader animasi dan navigasi responsif ramah perangkat seluler.</li>
+            <li>Sistem Modal Pop-up interaktif terhubung langsung ke live demo website.</li>
+          </ul>
+        `,
+        link: 'https://portfolio-aflah.vercel.app/',
+        buttonText: 'Kunjungi Website'
+      }
+    };
+
+    // Fungsi Buka Modal Keahlian (Skills)
+    function openSkillModal(skillId) {
+      const data = skillDetails[skillId];
+      if (!data) return;
+
+      document.getElementById('modalTag').innerText = data.tag;
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalBody').innerHTML = data.body;
+      
+      // Tombol aksi untuk modal keahlian cukup tombol 'Tutup'
+      document.getElementById('modalAction').innerHTML = `
+        <button class="btn-primary" onclick="closeModal()" style="font-size: 0.85rem; padding: 8px 22px;">Selesai</button>
+      `;
+
+      document.getElementById('appModal').classList.add('active');
+    }
+
+    // Fungsi Buka Modal Proyek (Projects)
+    function openProjectModal(projectId) {
+      const data = projectDetails[projectId];
+      if (!data) return;
+
+      document.getElementById('modalTag').innerText = data.tag;
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalBody').innerHTML = data.body;
+      
+      // Tombol aksi link eksternal untuk modal proyek
+      document.getElementById('modalAction').innerHTML = `
+        <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size: 0.85rem; padding: 8px 20px;">
+          ${data.buttonText || 'Buka Proyek'}
+        </a>
+      `;
+
+      document.getElementById('appModal').classList.add('active');
+    }
+
+    // Fungsi Tutup Modal
+    function closeModal() {
+      document.getElementById('appModal').classList.remove('active');
+    }
+
+    function closeModalOutside(event) {
+      if (event.target.id === 'appModal') {
+        closeModal();
+      }
+    }
+
+    // Scroll Reveal Animation (Muncul saat di-scroll)
+    const revealElements = document.querySelectorAll('.reveal');
+
+    function checkReveal() {
+      const windowHeight = window.innerHeight;
+      const revealPoint = 100;
+
+      revealElements.forEach(el => {
+        const revealTop = el.getBoundingClientRect().top;
+        if (revealTop < windowHeight - revealPoint) {
+          el.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('load', checkReveal);
   </script>
 
 </body>
